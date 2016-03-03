@@ -107,11 +107,9 @@ task copyShellScript(type: Copy) {
     into "build/docker"
 }
 
-import de.undercouch.gradle.tasks.download.Download
-task getElasticsearchTarball(type: Download) {
-    src "https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/" + "$elasticsearchVersion" + "/elasticsearch-"  + "$elasticsearchVersion" + ".tar.gz"
-    dest new File(buildDir, "./resources/main/public/elasticsearch.tar.gz")
-    onlyIfNewer true
+task getElasticsearchTarball(type: Copy) {
+    from 'elasticsearch/elasticsearch.tar.gz'
+    into "${buildDir}/resources/main/public/elasticsearch.tar.gz"
 }
 
 distTar.enabled = false
